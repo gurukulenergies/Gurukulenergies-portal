@@ -1,0 +1,845 @@
+/* ==========================================================================
+   GURUKUL ENERGIES PVT LTD - TENANT BILL LOOKUP & PAYMENT PORTAL
+   Mobile-first, responsive, accessible styles for bill checking & UPI payment
+   ========================================================================== */
+
+:root {
+  --primary-navy: #0B3C5D;
+  --primary-navy-dark: #071728;
+  --primary-blue: #1D5D9B;
+  --accent-gold: #F1A93B;
+  --accent-gold-hover: #D99126;
+  --accent-green: #10B981;
+  --accent-green-dark: #065F46;
+  --accent-red: #EF4444;
+  --accent-red-dark: #991B1B;
+  --bg-dark: #0A192F;
+  --bg-card: #0F2744;
+  --bg-input: #071A30;
+  --text-main: #F1F5F9;
+  --text-muted: #94A3B8;
+  --border-color: #1E3A5F;
+  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'Roboto Mono', Menlo, Consolas, monospace;
+  --font-brand: 'Outfit', sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --shadow-lg: 0 14px 34px rgba(0, 0, 0, 0.45);
+  --shadow-glow: 0 0 20px rgba(241, 169, 59, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background: linear-gradient(180deg, #071728 0%, #0A1E35 50%, #061322 100%);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.portal-header {
+  background: rgba(7, 23, 40, 0.95);
+  border-bottom: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.portal-header-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0.9rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand-svg-logo {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+.brand-title {
+  font-family: var(--font-brand);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: var(--accent-gold);
+  line-height: 1.2;
+}
+
+.brand-subtitle {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.header-badge-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(241, 169, 59, 0.12);
+  border: 1px solid rgba(241, 169, 59, 0.35);
+  color: var(--accent-gold);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.header-badge-link:hover {
+  background: var(--accent-gold);
+  color: #071728;
+}
+
+/* Main Container */
+.portal-main {
+  flex: 1;
+  max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+/* Card Container */
+.portal-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+/* Hero / Search Section */
+.search-card-body {
+  padding: 2rem 1.5rem 1.5rem;
+  text-align: center;
+}
+
+.hero-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, rgba(241, 169, 59, 0.2), rgba(11, 60, 93, 0.4));
+  border: 1.5px solid var(--accent-gold);
+  border-radius: 50%;
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.search-title {
+  font-family: var(--font-brand);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #FFF;
+  margin-bottom: 0.4rem;
+}
+
+.search-subtitle {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  max-width: 540px;
+  margin: 0 auto 1.5rem;
+}
+
+/* 5-Digit Search Input Form */
+.lookup-form {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.input-box-wrapper {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.bill-code-input {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-align: center;
+  background: var(--bg-input);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: #FFF;
+  padding: 0.75rem 1rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.bill-code-input:focus {
+  border-color: var(--accent-gold);
+  box-shadow: var(--shadow-glow);
+  background: #0A223E;
+}
+
+.btn-lookup {
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-hover));
+  color: #071728;
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 0 1.5rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s;
+  box-shadow: 0 4px 14px rgba(241, 169, 59, 0.3);
+}
+
+.btn-lookup:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+  box-shadow: 0 6px 18px rgba(241, 169, 59, 0.45);
+}
+
+.sample-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  font-size: 0.75rem;
+}
+
+.sample-chip-btn {
+  background: #092642;
+  border: 1px solid var(--border-color);
+  color: #E2E8F0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sample-chip-btn:hover {
+  background: var(--primary-blue);
+  border-color: var(--accent-gold);
+  color: #FFF;
+}
+
+.search-helper-text {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 1rem;
+}
+
+/* ==========================================================================
+   BILL RESULT DISPLAY CARD
+   ========================================================================== */
+.bill-result-card {
+  display: none;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.bill-result-card.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Status Banner */
+.status-banner {
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.status-banner.unpaid {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(185, 28, 28, 0.1) 100%);
+  border-bottom: 2px solid var(--accent-red);
+}
+
+.status-banner.paid {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(4, 120, 87, 0.1) 100%);
+  border-bottom: 2px solid var(--accent-green);
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 4px 12px;
+  border-radius: 999px;
+  letter-spacing: 0.4px;
+}
+
+.status-pill.unpaid {
+  background: var(--accent-red);
+  color: #FFF;
+}
+
+.status-pill.paid {
+  background: var(--accent-green);
+  color: #FFF;
+}
+
+.due-notice {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.due-notice.unpaid {
+  color: #FCA5A5;
+}
+
+.due-notice.paid {
+  color: #6EE7B7;
+}
+
+/* Bill Content Body */
+.bill-content-body {
+  padding: 1.5rem;
+}
+
+.bill-top-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1.25rem;
+}
+
+.bill-id-box h3 {
+  font-family: var(--font-brand);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #FFF;
+}
+
+.bill-num-code {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+
+.bill-dates-box {
+  text-align: right;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.bill-dates-box strong {
+  color: #FFF;
+}
+
+/* Tenant & Connection Info Grid */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+  background: #0A2038;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.info-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #FFF;
+}
+
+.info-value.mono {
+  font-family: var(--font-mono);
+  color: var(--accent-gold);
+}
+
+/* Consumption Highlights Strip */
+.consumption-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #06182C;
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+.c-stat-box small {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.c-stat-box strong {
+  font-size: 1.1rem;
+  font-family: var(--font-mono);
+  color: #FFF;
+}
+
+.c-stat-arrow {
+  font-size: 1.2rem;
+  color: var(--accent-gold);
+}
+
+.c-stat-box.highlight strong {
+  color: var(--accent-gold);
+  font-size: 1.25rem;
+}
+
+/* Financial Breakdown Table */
+.charges-table-wrap {
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.charges-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.charges-table th {
+  background: #0C2846;
+  color: #E2E8F0;
+  padding: 8px 12px;
+  font-weight: 700;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.charges-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(30, 58, 95, 0.4);
+}
+
+.charges-table tr:last-child td {
+  border-bottom: none;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.table-sub-row td {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  padding-left: 1.5rem;
+}
+
+.table-total-row td {
+  background: #0B2B4C;
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #FFF;
+  border-top: 2px solid var(--accent-gold);
+}
+
+.table-total-row .total-amount {
+  color: var(--accent-gold);
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+}
+
+/* ==========================================================================
+   PAYMENT QR / UPI SECTION (FOR UNPAID BILLS)
+   ========================================================================== */
+.payment-section-box {
+  background: #071C33;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.payment-section-box.unpaid-box {
+  border-color: rgba(241, 169, 59, 0.4);
+  background: linear-gradient(180deg, #071C33 0%, #06172B 100%);
+}
+
+.payment-header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.payment-header h4 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+  margin-bottom: 2px;
+}
+
+.payment-header p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.qr-payment-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+@media (min-width: 600px) {
+  .qr-payment-flex {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.portal-qr-frame {
+  background: #FFF;
+  border: 2px solid #5f259f;
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.portal-qr-frame canvas,
+.portal-qr-frame img {
+  display: block;
+  width: 170px !important;
+  height: 170px !important;
+}
+
+.payment-instructions-col {
+  flex: 1;
+  max-width: 360px;
+}
+
+.exact-amount-callout {
+  background: #0C2C4E;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  margin-bottom: 0.75rem;
+}
+
+.exact-amount-callout small {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  display: block;
+}
+
+.exact-amount-callout strong {
+  font-size: 1.35rem;
+  font-family: var(--font-mono);
+  color: var(--accent-gold);
+}
+
+.upi-details-list {
+  font-size: 0.78rem;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.upi-details-list span {
+  color: var(--text-muted);
+}
+
+.upi-details-list strong {
+  color: #FFF;
+}
+
+.btn-upi-mobile-pay {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+  background: linear-gradient(135deg, #5f259f, #7c3aed);
+  color: #FFF;
+  font-weight: 800;
+  font-size: 0.92rem;
+  padding: 0.7rem 1.25rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(95, 37, 159, 0.4);
+  transition: all 0.2s;
+  margin-bottom: 0.75rem;
+}
+
+.btn-upi-mobile-pay:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.accepted-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.app-pill {
+  background: #0E2E50;
+  color: #CBD5E1;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   PAID RECEIPT ACKNOWLEDGEMENT (FOR PAID BILLS)
+   ========================================================================== */
+.paid-receipt-box {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1.5px solid var(--accent-green);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.paid-receipt-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--accent-green);
+  font-size: 1rem;
+  font-weight: 800;
+  margin-bottom: 0.85rem;
+  border-bottom: 1px dashed rgba(16, 185, 129, 0.3);
+  padding-bottom: 0.5rem;
+}
+
+.paid-receipt-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+  font-size: 0.82rem;
+}
+
+.paid-receipt-grid span {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.paid-receipt-grid strong {
+  font-size: 0.92rem;
+  color: #FFF;
+}
+
+.paid-receipt-grid strong.green {
+  color: #34D399;
+}
+
+/* Actions & Support Bar */
+.portal-actions-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.btn-portal-action {
+  flex: 1;
+  min-width: 140px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  background: #0A2440;
+  color: #E2E8F0;
+  transition: all 0.2s;
+}
+
+.btn-portal-action:hover {
+  background: #113860;
+  color: #FFF;
+}
+
+.btn-portal-action.whatsapp {
+  background: #064E3B;
+  border-color: #059669;
+  color: #6EE7B7;
+}
+
+.btn-portal-action.whatsapp:hover {
+  background: #047857;
+  color: #FFF;
+}
+
+/* Error / Not Found Card */
+.not-found-card {
+  display: none;
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+}
+
+.not-found-card.active {
+  display: block;
+}
+
+.not-found-icon {
+  font-size: 3rem;
+  margin-bottom: 0.85rem;
+}
+
+.not-found-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #F87171;
+  margin-bottom: 0.5rem;
+}
+
+.not-found-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  max-width: 460px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+}
+
+/* Footer */
+.portal-footer {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-color);
+  background: #061322;
+}
+
+.footer-sync-tag {
+  display: inline-block;
+  margin-top: 0.4rem;
+  font-size: 0.7rem;
+  color: var(--accent-green);
+}
+
+/* Print Styles for Tenant Bill */
+@media print {
+  body {
+    background: #FFF !important;
+    color: #000 !important;
+  }
+  .portal-header, .portal-footer, .lookup-form, .sample-chips-row, .portal-actions-bar, .btn-upi-mobile-pay {
+    display: none !important;
+  }
+  .portal-main {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+  .portal-card {
+    border: none !important;
+    box-shadow: none !important;
+  }
+  .info-grid {
+    background: #F8FAFC !important;
+    color: #000 !important;
+    border: 1px solid #CBD5E1 !important;
+  }
+  .info-label, .c-stat-box small {
+    color: #475569 !important;
+  }
+  .info-value, .c-stat-box strong {
+    color: #000 !important;
+  }
+  .charges-table th {
+    background: #E2E8F0 !important;
+    color: #000 !important;
+  }
+  .charges-table td {
+    color: #000 !important;
+    border-color: #E2E8F0 !important;
+  }
+  .table-total-row td {
+    background: #FEF3C7 !important;
+    color: #000 !important;
+  }
+  .table-total-row .total-amount {
+    color: #000 !important;
+  }
+  .portal-qr-frame {
+    box-shadow: none !important;
+    border: 1px solid #000 !important;
+  }
+  .exact-amount-callout, .payment-section-box {
+    background: #FFF !important;
+    border-color: #CBD5E1 !important;
+  }
+  .exact-amount-callout strong {
+    color: #000 !important;
+  }
+}
+
+
+/* ===== Online payment box ===== */
+.gateway-pay-box{display:flex;flex-direction:column;gap:12px;max-width:420px;margin:6px auto 0;}
+.gateway-pay-box .btn-upi-mobile-pay{border:0;cursor:pointer;font-family:inherit;}
+.gateway-pay-box .btn-upi-mobile-pay:disabled{opacity:.6;cursor:wait;}
+.gw-msg{margin:0;min-height:1.2em;text-align:center;font-size:.9rem;color:#FDE047;}
+.gw-note{margin:0;text-align:center;font-size:.78rem;color:var(--text-muted);}

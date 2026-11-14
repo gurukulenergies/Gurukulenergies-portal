@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gurukul Energies - Check &amp; Pay Your Electricity Bill Online (Tenant Portal)</title>
+  <meta name="description" content="Gurukul Energies tenant portal: check your electricity bill by entering the last 5 digits of your bill number, see units consumed and payment status, and pay instantly by UPI / PhonePe.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://YOUR-DOMAIN.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Gurukul Energies - Check &amp; Pay Your Electricity Bill">
+  <meta property="og:description" content="Enter the last 5 digits of your bill number to view and pay your electricity bill by UPI.">
+  <meta property="og:url" content="https://YOUR-DOMAIN.com/">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Gurukul Energies Private Limited","url":"https://YOUR-DOMAIN.com/","telephone":"+91-7259970311","email":"support@gurukulenergies.com"}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&family=Roboto+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/portal.css">
+</head>
+<body>
+
+  <!-- Portal Header -->
+  <header class="portal-header">
+    <div class="portal-header-container">
+      <a href="/" class="brand-wrap">
+        <svg class="brand-svg-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="46" stroke="#F1A93B" stroke-width="4" fill="#0B3C5D"/>
+          <path d="M50 12 C30 12 18 28 18 48 C18 68 32 82 50 82 C68 82 82 68 82 48" stroke="#10B981" stroke-width="3" stroke-dasharray="4 2"/>
+          <path d="M52 20 L30 52 H48 L44 80 L70 44 H50 L52 20 Z" fill="#F1A93B" stroke="#FFF" stroke-width="1.5"/>
+          <path d="M65 30 Q75 42 62 55 C55 62 65 72 75 62" stroke="#10B981" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <div>
+          <h1 class="brand-title">GURUKUL ENERGIES</h1>
+          <p class="brand-subtitle">Tenant Electricity Bill & Payment Verification Portal</p>
+        </div>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="portal-main">
+    
+    <!-- Hero & 5-Digit Search Card -->
+    <div class="portal-card">
+      <div class="search-card-body">
+        <div class="hero-icon-wrap">🧾</div>
+        <h2 class="search-title">Check Your Electricity Bill</h2>
+        <p class="search-subtitle">
+          Enter the <strong>last 5 digits</strong> of your bill reference number printed on your bill receipt to view your charges, meter consumption, and payment status.
+        </p>
+
+        <!-- 5-Digit Input Form -->
+        <div class="lookup-form">
+          <div class="input-box-wrapper">
+            <input 
+              type="text" 
+              id="inpBillCode" 
+              class="bill-code-input" 
+              placeholder="e.g. 84920" 
+              maxlength="16" 
+              autocomplete="off" 
+              autofocus
+            >
+            <button type="button" id="btnSearch" class="btn-lookup">
+              <span>🔍 Check Bill</span>
+            </button>
+          </div>
+
+          <p class="search-helper-text">
+            💡 <em>Where to find your 5-digit code?</em> Look at the end of the <strong>BILL NO</strong> on your physical slip (e.g. For <code>GE/2026/09/84920</code>, your code is <strong>84920</strong>).
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error / Not Found Alert Card -->
+    <div id="notFoundCard" class="portal-card not-found-card">
+      <div class="not-found-icon">🔎</div>
+      <h3 class="not-found-title">No Bill Record Found</h3>
+      <p class="not-found-desc">
+        We couldn't find an electricity bill matching code <strong id="notFoundQueryText" style="color:#FFF;"></strong>.<br>
+        Please double-check the 5 digits on your physical bill slip or contact our campus billing office at <strong>7259970311</strong>.
+      </p>
+    </div>
+
+    <!-- Dynamic Bill Details Card (Shown on Match) -->
+    <div id="billResultCard" class="portal-card bill-result-card">
+      
+      <!-- Status Banner -->
+      <div id="resStatusBanner" class="status-banner unpaid">
+        <span id="resStatusPill" class="status-pill unpaid">🔴 PAYMENT PENDING (UNPAID)</span>
+        <span id="resDueNotice" class="due-notice unpaid">⚠️ Due on or before 24-09-2026</span>
+      </div>
+
+      <div class="bill-content-body">
+        
+        <!-- Bill Top Meta -->
+        <div class="bill-top-meta">
+          <div class="bill-id-box">
+            <h3 id="resConsumerName">House LH1</h3>
+            <span class="bill-num-code">Invoice: <strong id="resBillNo">GE/2026/09/84920</strong> <span id="resBillCodePill" class="app-pill">#84920</span></span>
+          </div>
+          <div class="bill-dates-box">
+            <div>Bill Date: <strong id="resBillDate">10-09-2026</strong></div>
+            <div>Due Date: <strong id="resDueDate">24-09-2026</strong></div>
+          </div>
+        </div>
+
+        <!-- Connection & Meter Info -->
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">Account / Quarter ID</span>
+            <span class="info-value mono" id="resAccountID">LH1</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Meter Serial Number</span>
+            <span class="info-value mono" id="resMeterSerial">1068634</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Sanctioned Load</span>
+            <span class="info-value" id="resSancLoad">1.0 KW</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Applicable Tariff</span>
+            <span class="info-value" id="resTariff">Solar ₹5.80 + Inv ₹1.20 / kWh</span>
+          </div>
+          <div class="info-item" style="grid-column: 1 / -1;">
+            <span class="info-label">Quarter Address</span>
+            <span class="info-value" id="resAddress" style="font-size: 0.82rem; font-weight: 500;">Light House Quarter LH1, Gurukul Energies Campus</span>
+          </div>
+        </div>
+
+        <!-- Meter Readings Strip -->
+        <div class="consumption-strip">
+          <div class="c-stat-box">
+            <small>Previous Reading</small>
+            <strong id="resPrevReading">14,200 kWh</strong>
+          </div>
+          <div class="c-stat-arrow">➔</div>
+          <div class="c-stat-box">
+            <small>Present Reading</small>
+            <strong id="resPresReading">14,435 kWh</strong>
+          </div>
+          <div class="c-stat-arrow">➔</div>
+          <div class="c-stat-box highlight">
+            <small>BILLED CONSUMPTION</small>
+            <strong id="resUnitsBilled">235 kWh</strong>
+          </div>
+        </div>
+
+        <!-- Itemized Charges Table -->
+        <div class="charges-table-wrap">
+          <table class="charges-table">
+            <thead>
+              <tr>
+                <th>Charge Particulars</th>
+                <th class="text-right">Amount (₹)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Fixed Sanctioned Load Charges</td>
+                <td class="text-right font-mono" id="resFixedChg">₹ 150.00</td>
+              </tr>
+              <tr class="table-sub-row">
+                <td id="resSolarRateLabel">↳ Solar Energy (235 kWh @ ₹5.80)</td>
+                <td class="text-right font-mono" id="resSolarChg">₹ 1,363.00</td>
+              </tr>
+              <tr class="table-sub-row">
+                <td id="resInvRateLabel">↳ Inverter Energy (235 kWh @ ₹1.20)</td>
+                <td class="text-right font-mono" id="resInvChg">₹ 282.00</td>
+              </tr>
+              <tr>
+                <td>Adjustment / Maintenance Charges</td>
+                <td class="text-right font-mono" id="resMaintChg">₹ 0.00</td>
+              </tr>
+              <tr>
+                <td>Electricity Tax (0%)</td>
+                <td class="text-right font-mono" id="resTaxChg">₹ 0.00</td>
+              </tr>
+              <tr>
+                <td>Less: Early Payment Discount / Rebate</td>
+                <td class="text-right font-mono" id="resRebateChg" style="color: var(--accent-green);">- ₹ 10.00</td>
+              </tr>
+              <tr class="table-total-row">
+                <td>TOTAL NET AMOUNT DUE:</td>
+                <td class="text-right total-amount" id="resNetPayable">₹ 1,785.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- UNPAID: UPI SCAN & PAY SECTION -->
+        <div id="resUnpaidSection" class="payment-section-box unpaid-box">
+          <div class="payment-header">
+            <h4>📱 Scan & Pay Bill via PhonePe / Any UPI App</h4>
+            <p>Scan with your mobile camera or tap the button below to pay immediately</p>
+          </div>
+
+          <!-- Online payment (shown when the server has Razorpay enabled) -->
+          <div id="gatewayPayBox" class="gateway-pay-box" style="display:none;">
+            <div class="exact-amount-callout">
+              <small>Amount to Pay:</small>
+              <strong id="gwAmount">₹ 0.00</strong>
+            </div>
+            <button type="button" id="btnPayOnline" class="btn-upi-mobile-pay">⚡ Pay Now (UPI / Card / Net Banking)</button>
+            <p id="gwMsg" class="gw-msg"></p>
+            <p class="gw-note">🔒 Secure payment by Razorpay. Your bill is marked PAID automatically once the payment succeeds.</p>
+          </div>
+
+          <div class="qr-payment-flex" id="legacyQrFlex">
+            <div class="portal-qr-frame">
+              <canvas id="resQrCanvas" width="170" height="170"></canvas>
+            </div>
+
+            <div class="payment-instructions-col">
+              <div class="exact-amount-callout">
+                <small>Exact Net Payable Amount Locked:</small>
+                <strong id="resQrAmount">₹ 1,785.00</strong>
+              </div>
+
+              <div class="upi-details-list">
+                <div><span>Beneficiary:</span> <strong id="resQrPayee">GURUKUL ENERGIES PVT LTD</strong></div>
+                <div><span>UPI ID (VPA):</span> <strong id="resQrVpa" style="color: #A78BFA;">Sunil6434@ybl</strong></div>
+                <div><span>Bank Account:</span> <strong>Axis Bank Ltd • 924020058291048</strong></div>
+                <div><span>Bank IFSC:</span> <strong>UTIB0000042</strong></div>
+              </div>
+
+              <!-- Direct 1-Tap UPI Launch Button (Mobile Users) -->
+              <a href="#" id="btnUpiMobile" class="btn-upi-mobile-pay">
+                <span>⚡ Pay Now via PhonePe / UPI App</span>
+              </a>
+
+              <div class="accepted-strip">
+                <span class="app-pill">PhonePe</span>
+                <span class="app-pill">GPay</span>
+                <span class="app-pill">Paytm</span>
+                <span class="app-pill">BHIM</span>
+                <span class="app-pill">Any UPI</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAID: OFFICIAL PAYMENT RECEIPT ACKNOWLEDGEMENT -->
+        <div id="resPaidSection" class="paid-receipt-box" style="display: none;">
+          <div class="paid-receipt-head">
+            <span>✅</span>
+            <span>OFFICIAL PAYMENT RECEIPT ACKNOWLEDGEMENT</span>
+          </div>
+          <div class="paid-receipt-grid">
+            <div>
+              <span>Bill Status:</span>
+              <strong class="green">CLEARED & PAID IN FULL</strong>
+            </div>
+            <div>
+              <span>Payment Received Date:</span>
+              <strong id="resPaidDate">12-09-2026 04:15 PM</strong>
+            </div>
+            <div>
+              <span>Transaction Ref / UTR:</span>
+              <strong id="resPaidTxn" style="font-family: var(--font-mono); color: var(--accent-gold);">UPI/625301849201</strong>
+            </div>
+            <div>
+              <span>Payment Mode:</span>
+              <strong id="resPaidMethod">PhonePe / UPI</strong>
+            </div>
+            <div>
+              <span>Credited Beneficiary:</span>
+              <strong id="resPaidPayee">Sunil6434@ybl</strong>
+            </div>
+            <div>
+              <span>Outstanding Dues:</span>
+              <strong class="green">₹ 0.00</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions & Support Bar -->
+        <div class="portal-actions-bar">
+          <button type="button" id="btnPrintPortalSlip" class="btn-portal-action">
+            <span>🖨️ Print / Save Bill</span>
+          </button>
+          <a href="https://wa.me/917259970311?text=Hello%20Gurukul%20Energies,%20regarding%20my%20electricity%20bill" target="_blank" class="btn-portal-action whatsapp">
+            <span>💬 WhatsApp Helpdesk</span>
+          </a>
+          <a href="tel:7259970311" class="btn-portal-action">
+            <span>📞 Call Support (7259970311)</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="portal-footer">
+    <p>Gurukul Energies Private Limited • Private Energy Distribution & Billing Service</p>
+    <p>Campus Support Helpline: +91 7259970311 • Email: support@gurukulenergies.com</p>
+  </footer>
+
+  <!-- QR Generator Libs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    if (typeof QRCode === 'undefined') {
+      document.write('<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"><\/script>');
+    }
+  </script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js" async></script>
+  <script src="/portal.js"></script>
+</body>
+</html>
