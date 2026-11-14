@@ -1,0 +1,2 @@
+# Gurukulenergies-portal
+Tenant Portal
